@@ -8,10 +8,10 @@ var app = express();
 
 // APP CONNECT CONFIG
 mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true  , useCreateIndex : true });
-
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(methodoverride("_method"));
+
 // MONGOOSE SCHEMA
 var blogSchema = new mongoose.Schema({
     username : "string",
@@ -22,19 +22,9 @@ var blogSchema = new mongoose.Schema({
     created: { type: Date, default: Date.now }
 });
 
+
 var Blog = mongoose.model("Blog", blogSchema);
 
-// Blog.create({
-//      title : "Test blog",
-//      img : "https://99firms.com/wp-content/uploads/2019/04/blogging-stats-featured.png",
-//      body : "this is the very useful blog."
-// } , function(err , blog){
-//      if(err){
-//           console.log("error in creating a blog");
-//      } else {
-//           console.log(blog);
-//      }
-// });
 
 // ROUTES
 app.get("/", function(req, res) {
@@ -129,6 +119,6 @@ app.delete("/blogs/:id" , function(req ,res){
 });
 
 
-app.listen(3000, function() {
+app.listen(5000, function() {
     console.log("server strated now of restful blog app");
 });
